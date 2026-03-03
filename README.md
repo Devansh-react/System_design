@@ -1,15 +1,15 @@
-## System Design – SOLID Principles in C++
+## System Design – SOLID & Design Patterns (C++ & Python)
 
-This repository demonstrates **SOLID design principles** using simple, focused **C++ examples**.  
-Each principle has:
+This repository demonstrates **SOLID design principles** and **classic design patterns** using simple, focused **C++ and Python examples**.  
+Most principles/patterns include:
 
 - **Clean implementation** that follows the principle
 - **Violation example** that shows what to avoid
 - **Diagram (`.png`)** to visualize the design
 
-The goal is to give you small, realistic snippets you can quickly read, run, and adapt.
+The goal is to give you small, realistic snippets you can quickly read, run, and adapt in either C++ or Python.
 
-### Repository structure
+### Repository structure (C++)
 
 ```
 SOLID_design_principal/
@@ -45,7 +45,19 @@ SOLID_design_principal/
     └── DIP.png             – DIP diagram
 ```
 
-### Principles overview
+### Repository structure (Python)
+
+- `Design_principle/`
+  - `Strategy_design_pattern/`
+    - `StrategyDesignPattern.py` – Strategy pattern with robot behaviors (walk/talk/fly)
+  - `Factory_designn_pattern/`
+    - `SimpleFactory.py` – Simple Factory for burgers
+    - `FactoryMethod.py` – Factory Method with multiple burger brands
+    - `AbstractFactory.py` – Abstract Factory producing burgers + garlic bread
+- `Google_docs/`
+  - `Document_editor.py` – Document editor example (composite + persistence abstraction)
+
+### SOLID principles (C++)
 
 - **SRP (Single Responsibility Principle)**  
   A class should have **only one reason to change**.  
@@ -91,69 +103,56 @@ SOLID_design_principal/
   In this repo:
   - `Dip.cpp` uses a `Database` interface with dependency injection so `UserService` depends on the abstraction, not concrete `MySQLDatabase` or `MongoDBDatabase`.
   - `Dip_voilated.cpp` tightly couples `UserService` to both MySQL and MongoDB with separate methods for each.
+### Design patterns (Python)
 
-### How to build and run (Windows / g++)
+- **Strategy pattern (`StrategyDesignPattern.py`)**
+  - `Robot` composes three behaviors: `WalkableRobot`, `TalkableRobot`, `FlyableRobot`.
+  - Concrete strategies like `NormalWalk`, `NoWalk`, `NormalTalk`, `NoTalk`, `NormalFly`, `NoFly` can be combined to build different robot types (`CompanionRobot`, `WorkerRobot`) without changing their code.
 
-Compile each example independently. From the repo root:
+- **Simple Factory (`SimpleFactory.py`)**
+  - `BurgerFactory` decides which `Burger` implementation (`BasicBurger`, `StandardBurger`, `PremiumBurger`) to build based on a string type.
 
-**SRP**
+- **Factory Method (`FactoryMethod.py`)**
+  - `BurgerFactory` is an abstraction implemented by `SinghBurger` and `KingBurger`.
+  - Each factory creates its own family of burgers (regular vs wheat variants) while clients depend only on the factory interface.
+
+- **Abstract Factory (`AbstractFactory.py`)**
+  - `MealFactory` can create multiple related products: `Burger` and `GarlicBread`.
+  - `SinghBurger` and `KingBurger` produce matching burger + garlic bread combinations (normal vs wheat).
+
+- **Document editor (`Document_editor.py`)**
+  - Uses a composite-style `Document` made of `DocumentElement` implementations (`TextElement`, `ImageElement`, `NewLineElement`, `TabSpaceElement`).
+  - `DocumentEditor` provides a simple API to build a document and delegates persistence to a `Persistence` abstraction (`FileStorage`, `DBStorage` placeholder).
+
+### How to build and run
+
+- **C++ examples (Windows / g++)**
+  - Use the commands under `SOLID_design_principal/` as shown above (e.g. `g++ SRP.cpp -std=c++11 -o srp`).
+  - Run with `./name` (Linux/macOS) or `.\name.exe` (Windows PowerShell).
+
+- **Python examples**
+  - Requires **Python 3.10+** (for the `|` union type hints).
+  - From the repo root:
+
 ```powershell
-cd SOLID_design_principal/SRP
-g++ SRP.cpp -std=c++11 -o srp
-g++ SRP_voilated.cpp -std=c++11 -o srp_violation
+cd Design_principle/Strategy_design_pattern
+python StrategyDesignPattern.py
+
+cd ../Factory_designn_pattern
+python SimpleFactory.py
+python FactoryMethod.py
+python AbstractFactory.py
+
+cd ../../Google_docs
+python Document_editor.py
 ```
 
-**OCP**
-```powershell
-cd SOLID_design_principal/OCP
-g++ OCP.cpp -std=c++11 -o ocp
-g++ ocp_voilated.cpp -std=c++11 -o ocp_violation
-```
-
-**LSP**
-```powershell
-cd SOLID_design_principal/LSP
-g++ LSP.cpp -std=c++11 -o lsp
-g++ LSP_voilate.cpp -std=c++11 -o lsp_violation
-```
-
-**LSP subrules**
-```powershell
-cd SOLID_design_principal/LSP/Method_rules
-g++ PreConditions.cpp -std=c++11 -o preconditions
-g++ PostConditions.cpp -std=c++11 -o postconditions
-
-cd ../Property_rule
-g++ ClassInvariants.cpp -std=c++11 -o invariants
-g++ HistoryConstraint.cpp -std=c++11 -o history
-
-cd ../Signature_rule
-g++ ReturnTypeRule.cpp -std=c++11 -o return_type
-g++ MethodArgumentRule.cpp -std=c++11 -o method_arg
-g++ ExceptionRule.cpp -std=c++11 -o exception_rule
-```
-
-**ISP**
-```powershell
-cd SOLID_design_principal/ISP
-g++ Isp.cpp -std=c++11 -o isp
-g++ isp_voilated.cpp -std=c++11 -o isp_violation
-```
-
-**DIP**
-```powershell
-cd SOLID_design_principal/DIP
-g++ Dip.cpp -std=c++11 -o dip
-g++ Dip_voilated.cpp -std=c++11 -o dip_violation
-```
-
-Run the executables with `./name` (Linux/macOS) or `.\name.exe` (Windows PowerShell).
-
-Adjust compiler flags as needed for your toolchain (e.g., `clang++` instead of `g++`).
+Adjust interpreter/paths as needed (e.g., `python3` on Linux/macOS).
 
 ### Requirements
 
 - **C++11 or later** compatible compiler (e.g., `g++`, `clang++`, MSVC)
+- **Python 3.10+** interpreter
 - A terminal or shell (PowerShell, CMD, Bash, etc.)
 
 ### License
