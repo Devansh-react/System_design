@@ -82,7 +82,7 @@ class KingBurger(BurgerFactory):
 if __name__ == "__main__":
     burger_type = "basic"
 
-    my_factory: BurgerFactory = SinghBurger()
+    my_factory: BurgerFactory = KingBurger()
     burger = my_factory.create_burger(burger_type)
 
     if burger is not None:
