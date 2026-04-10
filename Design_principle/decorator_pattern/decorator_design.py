@@ -5,7 +5,7 @@ class Character(ABC):
     @abstractmethod
     def get_abilities(self) -> str:
         pass
-    
+
 
 # Concrete Component: Basic Mario character with no power-ups.
 class Mario(Character):
@@ -51,6 +51,6 @@ def main():
     # Finally, add a StarPowerUp decoration.
     mario = StarPowerUp(mario)
     print(f"After StarPowerUp: {mario.get_abilities()}")
-
+    
 if __name__ == "__main__":
     main()

@@ -2,10 +2,8 @@ from abc import ABC, abstractmethod
 
 
 class Burger(ABC):
-    @abstractmethod
-    def prepare(self) -> None:
+    def prepare(self)->None:
         pass
-
 
 class BasicBurger(Burger):
     def prepare(self) -> None:

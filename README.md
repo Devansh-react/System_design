@@ -54,6 +54,8 @@ SOLID_design_principal/
     - `SimpleFactory.py` – Simple Factory for burgers
     - `FactoryMethod.py` – Factory Method with multiple burger brands
     - `AbstractFactory.py` – Abstract Factory producing burgers + garlic bread
+- `Food_delivery_app/`
+  - `Food_delivery.py` – Food delivery system design example (customers, restaurants, orders, delivery)
 - `Google_docs/`
   - `Document_editor.py` – Document editor example (composite + persistence abstraction)
 

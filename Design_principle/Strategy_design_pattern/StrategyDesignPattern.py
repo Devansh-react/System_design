@@ -76,6 +76,7 @@ class Robot(ABC):
     def fly(self) -> None:
         self.fly_behavior.fly()
 
+
     @abstractmethod
     def projection(self) -> None:
         pass
