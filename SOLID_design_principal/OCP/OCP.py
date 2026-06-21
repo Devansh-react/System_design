@@ -68,13 +68,15 @@ def main() -> None:
     printer = ShoppingCartPrinter(cart)
     printer.print_invoice()
 
-    db: Persistence = SQLPersistence()
-    mongo: Persistence = MongoPersistence()
-    file: Persistence = FilePersistence()
+    db = SQLPersistence()
+    mongo= MongoPersistence()
+    file = FilePersistence()
+
 
     db.save(cart)
     mongo.save(cart)
     file.save(cart)
+
 
 
 if __name__ == "__main__":
