@@ -1,0 +1,16 @@
+Design a elavator system 
+
+primary capablities 
+ 1. how many elevators and are they fixed or configrable 
+ 2. type sof elevator -> up and fown to call elavator and Hall calls press the floor where you want to go and will direct you to the elavator
+ 3. can passenger select multiple destination insid elavator
+ 4. elevator move effecientely 
+
+error handaling :
+invalid floor request 
+use select the floor on which he is already on 
+
+scope boundaries 
+ Capacities , weight , limits ,door mech , emergency stops 
+ Simulation 
+
