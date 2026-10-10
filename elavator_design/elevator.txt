@@ -14,3 +14,42 @@ scope boundaries
  Capacities , weight , limits ,door mech , emergency stops 
  Simulation 
 
+Requirements:
+1. System manages 3 elevators serving 10 floors (0-9)
+2. Users can request an elevator from any floor (hall call). System decides which elevator to dispatch.
+3. Once inside, users can select one or more destination floors
+4. Simulation runs in discrete time steps (e.g., a `step()` or `tick()` call advances time)
+5. Elevator stops come in two types:
+    - Hall calls: Request from a floor with direction (UP or DOWN)
+    - Destination: Request from inside elevator (no direction specified)
+6. System handles multiple concurrent pickup requests across floors
+7. Invalid requests should be rejected (return false)
+    - Non-existent floor numbers
+8. Requests for the current floor are treated as a no-op / already served (doors out of scope)
+
+Out of scope:
+- Weight capacity and passenger limits
+- Door open/close mechanics
+- Emergency stop functionality
+- Dynamic floor/elevator configuration
+- UI/rendering layer
+
+entities : -0 >  check for the nounbs in the requirements 
+1. Elevator (Class [ up or down , floor number])
+2. floor (int)
+3. Request (class  {floor number,direction} )
+4. elevator controller (class , controlls the hall req to dispatch the elevator)
+
+extensiblity 
+3. "What if multiple hall calls come in at the same time?"
+Lock around both. Same lock around requestElevator and step(). Simple and correct — no concurrent access to the set at all. The tradeoff is they block each other: a hall call waits while step is running and vice versa.
+Lock approach
+requestElevator(floor, type)
+    lock.acquire()
+    ...
+    lock.release()
+
+step()
+    lock.acquire()
+    ...
+    lock.release()

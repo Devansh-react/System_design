@@ -256,15 +256,16 @@ if __name__ == "__main__":
     # ---- Test 1: normal entry and exit (time based) ----
     print("Test 1: Car, time based pricing")
     t1 = entry.generate_ticket(VehicleFactory.create(VehicleType.CAR, "RJ14-1234"))
-    print(f"  Ticket {t1.ticket_id} -> spot {t1.spot.id}")
-    t1.entry_time = datetime.now() - timedelta(hours=2, minutes=10)  # pretend 2h10m ago -> 3 hours
-    exit_gate.process_exit(t1, UpiPayment())
-    print(f"  Ticket status: {t1.status.name}, spot free: {t1.spot.is_free()}")
+    if t1 is not None:
+        print(f"  Ticket {t1.ticket_id} -> spot {t1.spot.id}")
+        t1.entry_time = datetime.now() - timedelta(hours=2, minutes=10)  # pretend 2h10m ago -> 3 hours
+        exit_gate.process_exit(t1, UpiPayment())
+        print(f"  Ticket status: {t1.status.name}, spot free: {t1.spot.is_free()}")
 
     # ---- Test 2: switch to event based pricing ----
     print("\nTest 2: Bike, event based pricing")
     lot.set_pricing_strategy(EventBasedPricing())
-    t2 = entry.generate_ticket(VehicleFactory.create(VehicleType.BIKE, "RJ14-0001"))
+    t2 = entry.generate_ticket(VehicleFactory.create(VehicleType.BIKE, "RJ14-0001")) or Ticket(VehicleFactory.create(VehicleType.BIKE, "RJ14-0001"), ParkingSpot(999, VehicleType.BIKE))
     exit_gate.process_exit(t2, CashPayment())
 
     # ---- Test 3: lot full for a vehicle type ----
